@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "benchmark": "^2.1.4",
+    "numjs": "^0.16.0",
     "python-bridge": "^1.1.0"
   },
   "author": "www.steadylearner.com"
