@@ -9,7 +9,7 @@ const py = python(); // return value
 const {
   ex, // no return value
   end,
-} = py; // use py instead later
+} = py;
 
 const list = [3, 4, 2, 1];
 
@@ -19,7 +19,7 @@ ex`import math`;
 ex`import pyautogui`;
 ex`import numpy as np`;
 ex`import pandas`;
-ex`import time`;
+// ex`import time`;
 // ex`from numba import jit, njit`; I couldn't find how to use it here
 
 // </>
@@ -48,27 +48,15 @@ async function pyscript() {
 
     let returnExample = await py`returnit`; // return value with await and python
     console.log(returnExample);
- 
-    // If you want, use other framework such as https://www.npmjs.com/package/benchmark
-    // python function first, python is fast;
-    const start = new Date().getMilliseconds();
-    let returned = fromPy(await py`np.arange(1000).reshape(50, 20).tolist()`);
-    console.log(new Date().getMilliseconds() - start);
-    let compare = nj.arange(1000).reshape(50, 20).tolist();
-    console.log(new Date().getMilliseconds() - start);
 
-    // console.log(compare)
-    // console.log(returned);
+    let nptest = fromPy(await py`np.arange(1000).reshape(50, 20).tolist()`);
+    let njtest = nj.arange(1000).reshape(50, 20).tolist();
+   
+    // console.log(nptest)
+    // console.log(njtest);
 
-    // console.log(returned == compare); // false
-    // console.log(returned === compare); // false
-
-    // python function later, python is fast;
-    // const start = new Date().getMilliseconds();
-    // let compare = nj.arange(1000).reshape(50, 20).tolist();
-    // console.log(new Date().getMilliseconds() - start);
-    // let returned = fromPy(await py`(np.arange(1000).reshape(50, 20).tolist())`);
-    // console.log(new Date().getMilliseconds() - start);
+    // console.log(nptest == njstest); // false
+    // console.log(nptest === njtest); // false
 
     ex`thisislast = np.arange(10)**5`;
     let last = fromPy(await py`thisislast.reshape(2, 5).tolist()`);
